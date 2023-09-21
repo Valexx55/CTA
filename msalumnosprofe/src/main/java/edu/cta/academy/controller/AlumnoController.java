@@ -11,12 +11,14 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import edu.cta.academy.repository.entity.Alumno;
 import edu.cta.academy.service.AlumnoService;
+import io.swagger.v3.oas.annotations.Operation;
 
 /**
  * ESTA CLASE, RECIBE LAS PETICIONES DEL CLIENTE
@@ -32,6 +34,7 @@ public class AlumnoController {
 	AlumnoService alumnoService;
 	
 	//ALTA
+	@Operation(description = "Este método inserta un alumno en la base datos")
 	@PostMapping //POST http://localhost:8081/alumno
 	public ResponseEntity<?> insertarAlumno(@RequestBody Alumno alumno) // ResponseEntity representa el mensaje HTTP de respuesta
 	{
@@ -91,6 +94,28 @@ public class AlumnoController {
 		return responseEntity;
 	}
 	//MODIFICAR
+	
+	@PutMapping("/{id}") //PUT http://localhost:8081/alumno/5
+	public ResponseEntity<?> modificarAlumno(@RequestBody Alumno alumno, @PathVariable Long id) // ResponseEntity representa el mensaje HTTP de respuesta
+	{
+		ResponseEntity<?> responseEntity = null;
+		Optional<Alumno> oa = null;//alumno
+		
+			System.out.println("ALUMNO RX " + alumno);
+			oa =  this.alumnoService.modificarPorId(alumno, id);
+			
+			if (oa.isEmpty())
+			{
+				//si no está--devolver el cuerpo vacío y 404 no content
+				responseEntity = ResponseEntity.notFound().build();
+			}  else {
+				//el optional tiene un alumno //si está--devolver el alumno y 200 ok
+				Alumno alumno_modificado = oa.get();
+				responseEntity = ResponseEntity.ok(alumno_modificado);
+			}
+			
+		return responseEntity;
+	}
 	
 	//MÉTODO QUE DEVUELVA AL CLIENTE UN ALUMNO DE PRUEBA (NO DE LA BASE DE DATOS)
 	

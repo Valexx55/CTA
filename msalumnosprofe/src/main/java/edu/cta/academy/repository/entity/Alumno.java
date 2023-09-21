@@ -94,6 +94,12 @@ public class Alumno {
 	public Alumno() {
 		super();
 	}
+
+	@Override
+	public String toString() {
+		return "Alumno [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", email=" + email + ", edad="
+				+ edad + ", creadoEn=" + creadoEn + "]";
+	}
 	
 	
 	
