@@ -9,6 +9,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 @Entity//ESTA CLASE ESTÁ ASOCIADA UNA TABLA DE LA BD
 @Table(name = "alumnos")//esta asociada a esta
@@ -19,9 +25,18 @@ public class Alumno {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)//usar el Autoinc de Mysql
 	private Long id;
 	
+	@Size(min = 3, max = 20)
 	private String nombre;
+	
+	@NotEmpty //el apellido debe tener longitud > 1
+	@NotBlank //no admite que sea blancos
 	private String apellido;
+	
+	@Email
 	private String email;
+	
+	@Min(0)
+	@Max(130)
 	private int edad;
 	
 	@Column(name = "creado_en")

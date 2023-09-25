@@ -17,5 +17,7 @@ public interface AlumnoService {
 	Optional<Alumno> consultarPorId (Long id); //"huevo kinder"
 	//CONUSLTAR TODOS
 	Iterable<Alumno> consultarTodos();
+	//consultar por rango de edad
+	Iterable<Alumno> findByEdadBetween(int edadmin, int edadmax);
 
 }

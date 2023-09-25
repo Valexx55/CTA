@@ -11,6 +11,19 @@ import edu.cta.academy.repository.entity.Alumno;
 @Repository
 public interface AlumnoRepository extends CrudRepository<Alumno, Long> {
 	
+	//VAMOS A AÑADIR NUEVAS OPERACIONES EN LA BASE DATOS
 	
+	//1) KEYWORD QUERIES - Consultas por palabras clave
+	
+		 //consulta los alumnos que estén en un rango de edad
+	     Iterable<Alumno> findByEdadBetween(int edadmin, int edadmax);
+	
+	//2) JPQL - HQL
+	
+	//3) NATIVAS 
+	
+	//4) CRITERIA API 
+	
+	//5) STORED PROCEDURES 
 
 }

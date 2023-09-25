@@ -81,4 +81,11 @@ public class AlumnoServiceImpl implements AlumnoService {
 		return this.alumnoRepository.findAll();
 	}
 
+	@Override
+	@Transactional(readOnly = true)//optimizo para no bloquear la tabla. permito el acceso concurrente "lectura sucia"
+	public Iterable<Alumno> findByEdadBetween(int edadmin, int edadmax) {
+		
+		return this.alumnoRepository.findByEdadBetween(edadmin, edadmax);
+	}
+
 }
