@@ -54,6 +54,9 @@ public class AlumnoController {
 	{
 		ResponseEntity<?> responseEntity = null;
 		
+			String saludo = null;
+			saludo.length();
+			
 			this.alumnoService.borrarPorId(id);
 			responseEntity = ResponseEntity.status(HttpStatus.OK).build();
 		
@@ -88,6 +91,9 @@ public class AlumnoController {
 		ResponseEntity<?> responseEntity = null;
 		Iterable<Alumno> ita = null;//lista de alumnos
 		
+			/*var nombre = "HOLA";
+			nombre.charAt(4);*/
+			
 			ita =  this.alumnoService.consultarTodos();
 			responseEntity = ResponseEntity.ok(ita);//ita es el cuerpo
 		
