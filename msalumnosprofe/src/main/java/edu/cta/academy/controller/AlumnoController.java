@@ -191,5 +191,18 @@ public class AlumnoController {
 
 		return responseEntity;
 	}
+	
+	//GET //http://localhost:8081/alumno/contieneNombre/e
+	@GetMapping("/contieneNombre/{nombre}")		
+	public ResponseEntity<?> listarAlumnosNombre (@PathVariable String nombre) 
+	{
+		ResponseEntity<?> response = null;
+		Iterable<Alumno> resul = null;
+		
+		resul = this.alumnoService.findByNombreContaining(nombre);
+		response = ResponseEntity.ok(resul);
+		
+		return response;
+	}
 
 }

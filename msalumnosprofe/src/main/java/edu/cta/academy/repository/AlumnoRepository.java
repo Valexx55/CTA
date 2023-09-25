@@ -17,6 +17,9 @@ public interface AlumnoRepository extends CrudRepository<Alumno, Long> {
 	
 		 //consulta los alumnos que estén en un rango de edad
 	     Iterable<Alumno> findByEdadBetween(int edadmin, int edadmax);
+	     
+	     //consultar los alumnos que contengan un nombre dado 
+	     Iterable<Alumno> findByNombreContaining(String name);
 	
 	//2) JPQL - HQL
 	
