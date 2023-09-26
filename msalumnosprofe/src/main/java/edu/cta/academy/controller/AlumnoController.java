@@ -204,5 +204,27 @@ public class AlumnoController {
 		
 		return response;
 	}
+	
+	@GetMapping("/consultarNombreApellido/{patron}") // GET http://localhost:8081/alumno/consultarNombreApellido
+	public ResponseEntity<?> busquedaPorNombreOApellidoNativa(@PathVariable String patron) { 
+		ResponseEntity<?> responseEntity = null;
+		Iterable<Alumno> ita = null;
+		
+			ita = this.alumnoService.busquedaPorNombreOApellidoNativa(patron);
+			responseEntity = ResponseEntity.ok(ita);
+			
+		return responseEntity;
+	}
+	
+	@GetMapping("/consultarNombreApellidoJQPL/{patron}") // GET http://localhost:8081/alumno/consultarNombreApellidoJQPL
+	public ResponseEntity<?> busquedaPorNombreOApellidoJPQL(@PathVariable String patron) { 
+		ResponseEntity<?> responseEntity = null;
+		Iterable<Alumno> ita = null;
+		
+			ita = this.alumnoService.busquedaPorNombreOApellidoJPQL(patron);
+			responseEntity = ResponseEntity.ok(ita);
+			
+		return responseEntity;
+	}
 
 }

@@ -1,5 +1,6 @@
 package edu.cta.academy.repository;
 
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -21,9 +22,15 @@ public interface AlumnoRepository extends CrudRepository<Alumno, Long> {
 	     //consultar los alumnos que contengan un nombre dado 
 	     Iterable<Alumno> findByNombreContaining(String name);
 	
-	//2) JPQL - HQL
+	//2) JPQL - HQL // similar a SQL - en vez referinos a las tablas, lo hace a las entidades
+	     
+	     @Query(value = "SELECT a FROM Alumno a WHERE a.nombre LIKE %?1% OR a.apellido LIKE %?1%")
+	     Iterable<Alumno> busquedaPorNombreOApellidoJPQL (String patron);
 	
 	//3) NATIVAS 
+	     
+	     @Query(value = "SELECT * FROM alumnos a WHERE a.nombre LIKE %?1% OR a.apellido LIKE %?1%", nativeQuery = true)
+	     Iterable<Alumno> busquedaPorNombreOApellidoNativa (String patron);
 	
 	//4) CRITERIA API 
 	

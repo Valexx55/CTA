@@ -2,6 +2,8 @@ package edu.cta.academy.service;
 
 import java.util.Optional;
 
+import org.springframework.data.jpa.repository.Query;
+
 import edu.cta.academy.repository.entity.Alumno;
 
 //QUÉ HACEMOS
@@ -21,5 +23,9 @@ public interface AlumnoService {
 	Iterable<Alumno> findByEdadBetween(int edadmin, int edadmax);
 	
 	Iterable<Alumno> findByNombreContaining(String name);
+	
+	Iterable<Alumno> busquedaPorNombreOApellidoNativa (String patron);
+	
+    Iterable<Alumno> busquedaPorNombreOApellidoJPQL (String patron);
 
 }
