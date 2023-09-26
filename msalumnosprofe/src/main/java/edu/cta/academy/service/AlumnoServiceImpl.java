@@ -8,6 +8,7 @@ import javax.persistence.PersistenceContext;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -119,6 +120,19 @@ public class AlumnoServiceImpl implements AlumnoService {
 	public Map<String, Number> procedimientoEstadisticosEdad() {
 		
 		return this.alumnoRepository.procedimientoEstadisticosEdad(0, 0, 0f);
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public Iterable<Alumno> findAll(Pageable pageable) {
+		
+		return this.alumnoRepository.findAll(pageable);
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public Iterable<Alumno> findByEdadBetween(int edadmin, int edadmax, Pageable pageable) {
+		return this.alumnoRepository.findByEdadBetween(edadmin, edadmax, pageable);
 	}
 	
 

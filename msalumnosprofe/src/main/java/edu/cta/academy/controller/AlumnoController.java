@@ -11,6 +11,7 @@ import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -248,6 +249,34 @@ public class AlumnoController {
 			responseEntity = ResponseEntity.ok(mapstats);
 			
 		return responseEntity;
+	}
+	
+	//ejemplo de llamada http://localhost:8081/alumno/obtenerAlumnosPorPagina?page=1&size=3&sort=edad,ASC
+	@GetMapping("/obtenerAlumnosPorPagina") // GET http://localhost:8081/alumno/obtenerAlumnosPorPagina?page=0&size=2
+	public ResponseEntity<?> obtenerAlumnosPorPagina(Pageable pageable) { 
+		ResponseEntity<?> responseEntity = null;
+		Iterable<Alumno> listado = null;
+		
+			listado = this.alumnoService.findAll(pageable);
+			responseEntity = ResponseEntity.ok(listado);
+			
+		return responseEntity;
+	}
+	
+	//http://localhost:8081/alumno/edades-paginado?edadmin=5&edadmax=50&page=0&size=2&sort=edad,ASC
+	@GetMapping("/edades-paginado")		
+	public ResponseEntity<?> listarAlumnosEdadesPaginado(
+			@RequestParam(required = true, name="edadmin") int desde, 
+			@RequestParam(required = true, name="edadmax") int hasta,
+			Pageable pageable
+			) 
+	{
+		ResponseEntity<?> response = null;
+		
+		var resul = this.alumnoService.findByEdadBetween(desde, hasta, pageable);
+		response = ResponseEntity.ok(resul);
+		
+		return response;
 	}
 
 }
