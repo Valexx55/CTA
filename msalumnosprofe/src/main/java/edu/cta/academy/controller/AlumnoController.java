@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import edu.cta.academy.model.FraseChiquito;
 import edu.cta.academy.repository.entity.Alumno;
 import edu.cta.academy.service.AlumnoService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -277,6 +278,23 @@ public class AlumnoController {
 		response = ResponseEntity.ok(resul);
 		
 		return response;
+	}
+	
+	@GetMapping("/obtenerFraseChiquito") // GET http://localhost:8081/alumno/obtenerFraseChiquito
+	public ResponseEntity<?> obtenerFraseChiquito() { 
+		ResponseEntity<?> responseEntity = null;
+		Optional<FraseChiquito> ofrase = null;
+		
+			ofrase = this.alumnoService.obtenerFraseAleatoriaChiquito();
+			if (ofrase.isPresent())
+			{
+				responseEntity = ResponseEntity.ok(ofrase.get());
+			} else {
+				responseEntity = ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+			}
+			
+			
+		return responseEntity;
 	}
 
 }

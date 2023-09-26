@@ -11,7 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.client.RestTemplate;
 
+import edu.cta.academy.model.FraseChiquito;
 import edu.cta.academy.repository.AlumnoRepository;
 import edu.cta.academy.repository.entity.Alumno;
 
@@ -134,6 +136,21 @@ public class AlumnoServiceImpl implements AlumnoService {
 	public Iterable<Alumno> findByEdadBetween(int edadmin, int edadmax, Pageable pageable) {
 		return this.alumnoRepository.findByEdadBetween(edadmin, edadmax, pageable);
 	}
+
+	@Override
+	public Optional<FraseChiquito> obtenerFraseAleatoriaChiquito() {
+		Optional<FraseChiquito> oc = Optional.empty();
+		RestTemplate restTemplate = null;
+		FraseChiquito frase = null;
+			
+			restTemplate = new RestTemplate();
+			frase = restTemplate.getForObject("https://chiquitadas.es/api/quotes/avoleorrr", FraseChiquito.class);
+			oc  = Optional.of(frase);
+		
+		return oc;
+	}
+	
+	
 	
 
 }

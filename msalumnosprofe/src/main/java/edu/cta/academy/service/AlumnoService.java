@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 
+import edu.cta.academy.model.FraseChiquito;
 import edu.cta.academy.repository.entity.Alumno;
 
 //QUÉ HACEMOS
@@ -37,5 +38,8 @@ public interface AlumnoService {
     Iterable<Alumno> findAll (Pageable pageable);
     
     Iterable<Alumno> findByEdadBetween(int edadmin, int edadmax, Pageable pageable);
+    
+    //NOTA: No tocaría definirlo aquí
+    Optional<FraseChiquito> obtenerFraseAleatoriaChiquito ();
 
 }
