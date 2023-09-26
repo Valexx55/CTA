@@ -1,6 +1,9 @@
 package edu.cta.academy.repository;
 
+import java.util.Map;
+
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.jpa.repository.query.Procedure;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -35,5 +38,15 @@ public interface AlumnoRepository extends CrudRepository<Alumno, Long> {
 	//4) CRITERIA API 
 	
 	//5) STORED PROCEDURES 
+	     
+	     //1 DEFINID LOS PROCEDIMIENTOS EN BASE DE DATOS X
+	     //2 REFERENCIAMOS ESOS PROCEDIMIENTOS EN LA ENTIDAD ALUMNO x
+	     //3 HACEMOS MÉTODOS EN ALUMNO REPOSITORY @Procedure QUE USEN EL APARTADO 2
+	     @Procedure(name = "Alumno.alumnosRegistradosHoy")
+	     Iterable<Alumno> procedimientoAltaAlumnosHoy();
+	     
+	     @Procedure(name = "Alumno.alumnosEdadMediaMinMax")
+	     Map<String, Number> procedimientoEstadisticosEdad(int edadmax, int edadmin, float edadmedia);
+	     
 
 }

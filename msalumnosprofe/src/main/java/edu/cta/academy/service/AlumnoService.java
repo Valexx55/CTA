@@ -1,5 +1,6 @@
 package edu.cta.academy.service;
 
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.Query;
@@ -27,5 +28,9 @@ public interface AlumnoService {
 	Iterable<Alumno> busquedaPorNombreOApellidoNativa (String patron);
 	
     Iterable<Alumno> busquedaPorNombreOApellidoJPQL (String patron);
+    
+    Iterable<Alumno> procedimientoAltaAlumnosHoy();
+    
+    Map<String, Number> procedimientoEstadisticosEdad();
 
 }

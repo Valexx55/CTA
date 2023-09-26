@@ -3,6 +3,7 @@ package edu.cta.academy.controller;
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import javax.validation.Valid;
@@ -223,6 +224,28 @@ public class AlumnoController {
 		
 			ita = this.alumnoService.busquedaPorNombreOApellidoJPQL(patron);
 			responseEntity = ResponseEntity.ok(ita);
+			
+		return responseEntity;
+	}
+	
+	@GetMapping("/obtenerAlumnosAltaHoy") // GET http://localhost:8081/alumno/obtenerAlumnosAltaHoy
+	public ResponseEntity<?> obtenerAlumnosAltaHoy() { 
+		ResponseEntity<?> responseEntity = null;
+		Iterable<Alumno> ita = null;
+		
+			ita = this.alumnoService.procedimientoAltaAlumnosHoy();
+			responseEntity = ResponseEntity.ok(ita);
+			
+		return responseEntity;
+	}
+	
+	@GetMapping("/obtenerEstadisticosEdad") // GET http://localhost:8081/alumno/obtenerEstadisticosEdad
+	public ResponseEntity<?> obtenerEstadisticosEdad() { 
+		ResponseEntity<?> responseEntity = null;
+		Map<String, Number> mapstats = null;
+		
+			mapstats = this.alumnoService.procedimientoEstadisticosEdad();
+			responseEntity = ResponseEntity.ok(mapstats);
 			
 		return responseEntity;
 	}

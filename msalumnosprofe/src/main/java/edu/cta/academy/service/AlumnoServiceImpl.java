@@ -1,5 +1,6 @@
 package edu.cta.academy.service;
 
+import java.util.Map;
 import java.util.Optional;
 
 import javax.persistence.EntityManager;
@@ -105,6 +106,19 @@ public class AlumnoServiceImpl implements AlumnoService {
 	@Transactional(readOnly = true)	
 	public Iterable<Alumno> busquedaPorNombreOApellidoJPQL(String patron) {
 		return this.alumnoRepository.busquedaPorNombreOApellidoJPQL(patron);
+	}
+
+	@Override
+	@Transactional //no indicamos ReadOnly a true porque en los procedimientos NO VA
+	public Iterable<Alumno> procedimientoAltaAlumnosHoy() {
+		return this.alumnoRepository.procedimientoAltaAlumnosHoy();
+	}
+
+	@Override
+	@Transactional
+	public Map<String, Number> procedimientoEstadisticosEdad() {
+		
+		return this.alumnoRepository.procedimientoEstadisticosEdad(0, 0, 0f);
 	}
 	
 
