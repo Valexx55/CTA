@@ -1,5 +1,6 @@
 package edu.cta.academy.controller;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
@@ -30,6 +31,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import edu.cta.academy.model.FraseChiquito;
 import edu.cta.academy.repository.entity.Alumno;
@@ -307,5 +309,43 @@ public class AlumnoController {
 			
 		return responseEntity;
 	}
+	
+	//3 MÉTODOS NUEVOS
+		//1 POST CON FOTO
+	@PostMapping("/crear-con-foto") // POST http://localhost:8081/alumno/crear-con-foto
+	public ResponseEntity<?> insertarAlumnoConFoto(@Valid Alumno alumno, BindingResult br, MultipartFile archivo ) throws IOException // ResponseEntity
+																									// respuesta
+	{
+		ResponseEntity<?> responseEntity = null;
+		Alumno alumno_nuevo = null;
+
+		if (br.hasErrors()) {
+			responseEntity = obtenerErrores(br);
+		} else {
+			logger.debug("El alumno viene sin fallos");
+			
+			if (!archivo.isEmpty())
+			{
+				logger.debug("VIENE CON FOTO");
+				try {
+					alumno.setFoto(archivo.getBytes());
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					//e.printStackTrace();
+					logger.error("error al cargar la foto", e);
+					throw e;
+				}
+				
+			}
+			alumno_nuevo = this.alumnoService.alta(alumno);
+			responseEntity = ResponseEntity.status(HttpStatus.CREATED).body(alumno_nuevo);
+			
+		}
+
+		return responseEntity;
+	}
+	
+		//2 PUT CON FOTO
+		//3 GET FOTO POR ID
 
 }

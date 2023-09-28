@@ -7,7 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
+import javax.persistence.Lob;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
@@ -16,6 +16,8 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.ParameterMode;
 import javax.persistence.NamedStoredProcedureQueries;
@@ -56,8 +58,32 @@ public class Alumno {
 	@Max(130)
 	private int edad;
 	
+	@Lob //objeto binario largo
+	@JsonIgnore //evito serializar este atributo a JSON
+	private byte[] foto;
+	
 	@Column(name = "creado_en")
 	private LocalDateTime creadoEn;
+	
+	/**
+	 * este método es usado a modo de "flag" - bandera-indicador
+	 * si un alumno tiene foto asociada, valdrá un númer
+	 * si no, será null
+	 * @return
+	 */
+	public Integer getFotoHashCode ()
+	{
+		Integer idev = null;
+		
+			if (this.foto!=null)
+			{
+				idev = this.foto.hashCode();
+			}
+		
+		
+		return idev;
+	}
+	
 	
 	@PrePersist //antes que se inserte un alumno, se ejecuta este método
 	private void genererFechaCreacion()
@@ -111,6 +137,15 @@ public class Alumno {
 
 	public void setCreadoEn(LocalDateTime creadoEn) {
 		this.creadoEn = creadoEn;
+	}
+	
+
+	public byte[] getFoto() {
+		return foto;
+	}
+
+	public void setFoto(byte[] foto) {
+		this.foto = foto;
 	}
 
 	public Alumno(Long id, String nombre, String apellido, String email, int edad, LocalDateTime creadoEn) {
