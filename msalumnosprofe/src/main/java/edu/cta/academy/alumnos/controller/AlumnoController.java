@@ -1,4 +1,4 @@
-package edu.cta.academy.controller;
+package edu.cta.academy.alumnos.controller;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -14,8 +14,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -33,9 +36,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import edu.cta.academy.model.FraseChiquito;
-import edu.cta.academy.repository.entity.Alumno;
-import edu.cta.academy.service.AlumnoService;
+import edu.cta.academy.alumnos.model.FraseChiquito;
+import edu.cta.academy.alumnos.repository.entity.Alumno;
+import edu.cta.academy.alumnos.service.AlumnoService;
 import io.swagger.v3.oas.annotations.Operation;
 
 /**
@@ -346,6 +349,86 @@ public class AlumnoController {
 	}
 	
 		//2 PUT CON FOTO
+
+	//NOTA: EL NOMBRE del parámetro debe coincidir con el nomber de la clave en la petición
+	@PutMapping("/modificar-con-foto/{id}") // PUT http://localhost:8081/alumno/modificar-con-foto/5
+	public ResponseEntity<?> modificarAlumno(@Valid Alumno alumno, BindingResult br, MultipartFile archivo  , @PathVariable Long id) throws IOException // ResponseEntity
+																															// respuesta
+	{
+		ResponseEntity<?> responseEntity = null;
+		Optional<Alumno> oa = null;// alumno
+
+		if (br.hasErrors()) {
+			logger.debug("Alumno con errores en PUT");
+			responseEntity = obtenerErrores(br);
+
+		} else {
+
+			logger.debug("ALUMNO RX " + alumno);
+			
+			if (!archivo.isEmpty())
+			{
+				try {
+					alumno.setFoto(archivo.getBytes());
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					logger.error("ERROR AL MODIFICAR CON FOTO", e);
+					throw e;
+				}
+			}
+			
+			oa = this.alumnoService.modificarPorId(alumno, id);
+
+			if (oa.isEmpty()) {
+				// si no está--devolver el cuerpo vacío y 404 no content
+				responseEntity = ResponseEntity.notFound().build();
+			} else {
+				// el optional tiene un alumno //si está--devolver el alumno y 200 ok
+				Alumno alumno_modificado = oa.get();
+				responseEntity = ResponseEntity.ok(alumno_modificado);
+			}
+
+		}
+
+		return responseEntity;
+	}
+	
 		//3 GET FOTO POR ID
+	@GetMapping("/obtenerFoto/{id}") // GET http://localhost:8081/alumno/obtenerFoto/5
+	public ResponseEntity<?> obtenerFotoAlumnoPorId(@PathVariable Long id) // ResponseEntity representa el mensaje HTTP de
+																		// respuesta
+	{
+		ResponseEntity<?> responseEntity = null;
+		Optional<Alumno> oa = null;// alumno
+
+		oa = this.alumnoService.consultarPorId(id);
+
+		if (oa.isEmpty()) {
+			
+			// si no está--devolver el cuerpo vacío y 204 no content
+			logger.debug("El alumno NO existe ");
+			responseEntity = ResponseEntity.noContent().build();
+		} else {
+			// el optional tiene un alumno //si está--devolver el alumno y 200 ok
+			Alumno alumno_leido = oa.get();
+			//TODO obtener la foto de ese alumno
+			if (alumno_leido.getFoto()!=null)
+			{
+				logger.debug("El alumno tiene foto");
+				//Resource podría ser cualquier archivo
+				Resource imagen = new ByteArrayResource(alumno_leido.getFoto());//obtengo la imagen
+				responseEntity = ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(imagen);
+			} else {
+				logger.debug("El alumno existe pero NO tiene foto");
+				responseEntity = ResponseEntity.noContent().build();
+			}
+			
+		}
+
+		return responseEntity;
+	}
+	
+	
+	
 
 }

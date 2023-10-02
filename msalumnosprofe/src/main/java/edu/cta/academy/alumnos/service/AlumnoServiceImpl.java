@@ -1,4 +1,4 @@
-package edu.cta.academy.service;
+package edu.cta.academy.alumnos.service;
 
 import java.util.Map;
 import java.util.Optional;
@@ -13,9 +13,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
-import edu.cta.academy.model.FraseChiquito;
-import edu.cta.academy.repository.AlumnoRepository;
-import edu.cta.academy.repository.entity.Alumno;
+import edu.cta.academy.alumnos.model.FraseChiquito;
+import edu.cta.academy.alumnos.repository.AlumnoRepository;
+import edu.cta.academy.alumnos.repository.entity.Alumno;
 
 /**
  * ESTA CLASE REALIZA LAS TAREAS DE LA APLICACION DEFINIDAS EN ALUMNOSERVICE

@@ -1,4 +1,4 @@
-package edu.cta.academy.repository;
+package edu.cta.academy.alumnos.repository;
 
 import java.util.Map;
 
@@ -10,7 +10,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
-import edu.cta.academy.repository.entity.Alumno;
+import edu.cta.academy.alumnos.repository.entity.Alumno;
 
 /**
  * ESTA CLASE SE DEDICA A INTERACTUAR CON LA BASE DE DATOS

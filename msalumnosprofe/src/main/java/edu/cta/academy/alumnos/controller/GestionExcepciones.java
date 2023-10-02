@@ -1,4 +1,4 @@
-package edu.cta.academy.controller;
+package edu.cta.academy.alumnos.controller;
 
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.ResponseEntity;

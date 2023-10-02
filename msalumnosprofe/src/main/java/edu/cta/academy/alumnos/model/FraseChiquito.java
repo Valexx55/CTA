@@ -1,4 +1,4 @@
-package edu.cta.academy.model;
+package edu.cta.academy.alumnos.model;
 
 public class FraseChiquito {
 	

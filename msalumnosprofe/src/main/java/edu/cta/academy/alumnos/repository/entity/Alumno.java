@@ -1,4 +1,4 @@
-package edu.cta.academy.repository.entity;
+package edu.cta.academy.alumnos.repository.entity;
 
 import java.time.LocalDateTime;
 
@@ -28,7 +28,7 @@ import javax.persistence.StoredProcedureParameter;
 @Table(name = "alumnos")//esta asociada a esta
 @NamedStoredProcedureQueries (
 		{
-			@NamedStoredProcedureQuery(name="Alumno.alumnosRegistradosHoy", procedureName = "obtenerAlumnosRegistradosHoy", resultClasses = edu.cta.academy.repository.entity.Alumno.class),
+			@NamedStoredProcedureQuery(name="Alumno.alumnosRegistradosHoy", procedureName = "obtenerAlumnosRegistradosHoy", resultClasses = edu.cta.academy.alumnos.repository.entity.Alumno.class),
 			@NamedStoredProcedureQuery(name="Alumno.alumnosEdadMediaMinMax", procedureName = "calcular_max_min_media_edad",
 			parameters = {
 					@StoredProcedureParameter (mode = ParameterMode.INOUT , type = Integer.class , name ="edadmax"),
