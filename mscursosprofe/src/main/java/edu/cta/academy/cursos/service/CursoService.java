@@ -2,7 +2,7 @@ package edu.cta.academy.cursos.service;
 
 import java.util.Optional;
 
-import edu.cta.academy.cursos.repository.entity.Curso;
+import edu.cta.academy.comun.entity.Curso;
 
 public interface CursoService {
 	

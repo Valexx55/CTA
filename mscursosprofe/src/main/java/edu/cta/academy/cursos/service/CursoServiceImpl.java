@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import edu.cta.academy.comun.entity.Curso;
 import edu.cta.academy.cursos.repository.CursoRespository;
-import edu.cta.academy.cursos.repository.entity.Curso;
 
 @Service
 @Transactional//afecta a todos los métodos de la clase

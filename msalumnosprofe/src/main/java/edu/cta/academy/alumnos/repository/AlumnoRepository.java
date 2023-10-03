@@ -10,7 +10,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
-import edu.cta.academy.alumnos.repository.entity.Alumno;
+import edu.cta.academy.comun.entity.Alumno;
 
 /**
  * ESTA CLASE SE DEDICA A INTERACTUAR CON LA BASE DE DATOS

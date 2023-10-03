@@ -62,6 +62,12 @@
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
 		</dependency>
+		<!-- ADD JAR COMUN-->
+		<dependency>
+			<groupId>edu.cta.academy</groupId>
+			<artifactId>mscomunprofe</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 
 	<build>

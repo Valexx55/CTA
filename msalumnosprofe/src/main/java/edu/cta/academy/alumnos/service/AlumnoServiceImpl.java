@@ -15,7 +15,7 @@ import org.springframework.web.client.RestTemplate;
 
 import edu.cta.academy.alumnos.model.FraseChiquito;
 import edu.cta.academy.alumnos.repository.AlumnoRepository;
-import edu.cta.academy.alumnos.repository.entity.Alumno;
+import edu.cta.academy.comun.entity.Alumno;
 
 /**
  * ESTA CLASE REALIZA LAS TAREAS DE LA APLICACION DEFINIDAS EN ALUMNOSERVICE

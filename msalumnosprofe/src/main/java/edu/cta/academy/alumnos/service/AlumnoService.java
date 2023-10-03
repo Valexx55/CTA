@@ -7,7 +7,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 
 import edu.cta.academy.alumnos.model.FraseChiquito;
-import edu.cta.academy.alumnos.repository.entity.Alumno;
+import edu.cta.academy.comun.entity.Alumno;
 
 //QUÉ HACEMOS
 public interface AlumnoService {

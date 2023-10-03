@@ -1,4 +1,6 @@
-package edu.cta.academy.cursos.repository.entity;
+package edu.cta.academy.comun.entity;
+
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -24,6 +26,8 @@ public class Curso {
 	private String nombre;
 	
 	//TODO add relación con cursos
+	
+	//private List<Alumno> lista_alumnos;
 	
 	
 
