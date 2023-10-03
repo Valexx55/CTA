@@ -1,6 +1,7 @@
 package edu.cta.academy.comun.entity;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -167,9 +168,32 @@ public class Alumno {
 		return "Alumno [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", email=" + email + ", edad="
 				+ edad + ", creadoEn=" + creadoEn + "]";
 	}
+
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
+
+
+	@Override
+	public boolean equals(Object obj) {
+		boolean iguales = false;
+		
+			if (this==obj)
+			{
+				iguales = true;
+				//pattern-matching java14 SI SE CUMPLE EL instanceOf, automáticamente, hace el casting de Object a Alumno en a
+			} else if (obj instanceof Alumno a) 
+			{
+				//iguales = this.id.equals(a.id);
+				iguales = Objects.equals(this.id, a.id);
+			}
+		return iguales;
+	}
 	
 	
-	
+
 	
 
 }

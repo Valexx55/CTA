@@ -3,9 +3,11 @@ package edu.cta.academy.comun.entity;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -27,8 +29,17 @@ public class Curso {
 	
 	//TODO add relación con cursos
 	
-	//private List<Alumno> lista_alumnos;
+	@OneToMany (fetch = FetchType.LAZY)
+	private List<Alumno> alumnos;
 	
+	public void addAlumno (Alumno alumno)
+	{
+		this.alumnos.add(alumno);
+	}
 	
+	public void eliminarAlumno (Alumno alumno)
+	{
+		this.alumnos.remove(alumno);
+	}
 
 }

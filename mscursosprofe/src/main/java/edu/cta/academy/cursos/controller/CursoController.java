@@ -1,5 +1,6 @@
 package edu.cta.academy.cursos.controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import edu.cta.academy.comun.entity.Alumno;
 import edu.cta.academy.comun.entity.Curso;
 import edu.cta.academy.cursos.service.CursoService;
 
@@ -41,7 +43,7 @@ public class CursoController {
 
 	@DeleteMapping("/{id}") // DELETE http://localhost:8082/curso
 	public ResponseEntity<?> borrarCurso(@PathVariable Long id) // ResponseEntity representa el mensaje HTTP de
-																	// respuesta
+																// respuesta
 	{
 		ResponseEntity<?> responseEntity = null;
 
@@ -107,5 +109,34 @@ public class CursoController {
 
 		return responseEntity;
 	}
+
+	@PutMapping("/addAlumns/{idCurso}") //http://localhost:8082/addAlumns/1
+	public ResponseEntity<?> addMultipleToCourse(@RequestBody List<Alumno> alumnos, @PathVariable Long idCurso) {
+		ResponseEntity<?> resp = null;
+		
+			var courseModified = this.cursoService.asignarAlumnos(alumnos, idCurso);
+			if (courseModified.isPresent()) {
+				resp = ResponseEntity.ok(courseModified.get());
+			} else {
+				resp = ResponseEntity.notFound().build();
+			}
+			
+		return resp;
+	}
+	
+	@PutMapping("/borrarAlumno/{idCurso}") //http://localhost:8082/curso/borrarAlumno/1
+	public ResponseEntity<?> borrarAlumno(@RequestBody Alumno alumno, @PathVariable Long idCurso) {
+		ResponseEntity<?> resp = null;
+		
+			var courseModified = this.cursoService.eliminarAlumno(alumno, idCurso);
+			if (courseModified.isPresent()) {
+				resp = ResponseEntity.ok(courseModified.get());
+			} else {
+				resp = ResponseEntity.notFound().build();
+			}
+			
+		return resp;
+	}
+
 
 }
