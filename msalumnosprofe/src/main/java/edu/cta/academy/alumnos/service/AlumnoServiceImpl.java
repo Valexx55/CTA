@@ -13,9 +13,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
+import edu.cta.academy.alumnos.cliente.CursoFeignClient;
 import edu.cta.academy.alumnos.model.FraseChiquito;
 import edu.cta.academy.alumnos.repository.AlumnoRepository;
 import edu.cta.academy.comun.entity.Alumno;
+import edu.cta.academy.comun.entity.Curso;
 
 /**
  * ESTA CLASE REALIZA LAS TAREAS DE LA APLICACION DEFINIDAS EN ALUMNOSERVICE
@@ -29,6 +31,9 @@ public class AlumnoServiceImpl implements AlumnoService {
 	
 	@Autowired //con esto, consigo que el alumnoRepository instanciado automáticamte por spring, esté aquí
 	AlumnoRepository alumnoRepository;
+	
+	@Autowired
+	CursoFeignClient cursoFeignClient; //usaremos este objeto para saber a qué curso pertenece un alumno
 
 	@Override
 	@Transactional
@@ -147,6 +152,15 @@ public class AlumnoServiceImpl implements AlumnoService {
 			frase = restTemplate.getForObject("https://chiquitadas.es/api/quotes/avoleorrr", FraseChiquito.class);
 			oc  = Optional.of(frase);
 		
+		return oc;
+	}
+
+	@Override
+	public Optional<Curso> obtenerCursoAlumno(Long idalumno) {
+		Optional<Curso> oc = Optional.empty();
+		
+			oc = this.cursoFeignClient.obtenerCursoAlumno(idalumno);
+			
 		return oc;
 	}
 	

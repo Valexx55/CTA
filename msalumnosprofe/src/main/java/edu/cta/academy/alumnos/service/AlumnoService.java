@@ -5,9 +5,11 @@ import java.util.Optional;
 
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import edu.cta.academy.alumnos.model.FraseChiquito;
 import edu.cta.academy.comun.entity.Alumno;
+import edu.cta.academy.comun.entity.Curso;
 
 //QUÉ HACEMOS
 public interface AlumnoService {
@@ -41,5 +43,7 @@ public interface AlumnoService {
     
     //NOTA: No tocaría definirlo aquí
     Optional<FraseChiquito> obtenerFraseAleatoriaChiquito ();
+    
+    Optional<Curso> obtenerCursoAlumno(Long idalumno);
 
 }

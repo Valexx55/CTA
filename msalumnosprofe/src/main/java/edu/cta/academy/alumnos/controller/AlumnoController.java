@@ -39,6 +39,7 @@ import org.springframework.web.multipart.MultipartFile;
 import edu.cta.academy.alumnos.model.FraseChiquito;
 import edu.cta.academy.alumnos.service.AlumnoService;
 import edu.cta.academy.comun.entity.Alumno;
+import edu.cta.academy.comun.entity.Curso;
 import io.swagger.v3.oas.annotations.Operation;
 
 /**
@@ -428,6 +429,28 @@ public class AlumnoController {
 		return responseEntity;
 	}
 	
+	
+	@GetMapping("/obtenerCursoAlumnoViaFeign/{id}") // GET http://localhost:8081/alumno/obtenerCursoAlumnoViaFeign/5
+	public ResponseEntity<?> obtenerCursoAlumnoViaFeign(@PathVariable Long id) // ResponseEntity representa el mensaje HTTP de
+																		// respuesta
+	{
+		ResponseEntity<?> responseEntity = null;
+		Optional<Curso> oc = null;// curso
+
+		oc = this.alumnoService.obtenerCursoAlumno(id);
+
+		if (oc.isEmpty()) {
+			// si no está--devolver el cuerpo vacío y 204 no content
+			responseEntity = ResponseEntity.noContent().build();
+		} else {
+			// el optional tiene un curso //si está--devolver el curso y 200 ok
+			Curso curso_leido = oc.get();
+			responseEntity = ResponseEntity.ok(curso_leido);
+		}
+
+		return responseEntity;
+	}
+
 	
 	
 

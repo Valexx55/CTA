@@ -139,7 +139,7 @@ public class CursoController {
 	}
 	
 	
-	@GetMapping("/obtenerCursoAlumno/{idalumno}") // GET http://localhost:8082/obtenerCursoAlumno/curso/5
+	@GetMapping("/obtenerCursoAlumno/{idalumno}") // GET http://localhost:8082/curso/obtenerCursoAlumno/5
 	public ResponseEntity<?> obtenerCursoAlumno(@PathVariable Long idalumno) // ResponseEntity representa el mensaje HTTP de
 																		// respuesta
 	{
