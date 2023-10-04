@@ -22,4 +22,6 @@ public interface CursoService {
 	
 	Optional<Curso> eliminarAlumno (Alumno alumno, Long id);
 	
+	Optional<Curso> obtenerCursoAlumno (Long id_alumno);
+	
 }

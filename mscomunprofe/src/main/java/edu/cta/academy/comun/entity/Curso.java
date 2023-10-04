@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -30,6 +32,7 @@ public class Curso {
 	//TODO add relación con cursos
 	
 	@OneToMany (fetch = FetchType.LAZY)
+	//@JsonIgnore
 	private List<Alumno> alumnos;
 	
 	public void addAlumno (Alumno alumno)

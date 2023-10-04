@@ -137,6 +137,27 @@ public class CursoController {
 			
 		return resp;
 	}
+	
+	
+	@GetMapping("/obtenerCursoAlumno/{idalumno}") // GET http://localhost:8082/obtenerCursoAlumno/curso/5
+	public ResponseEntity<?> obtenerCursoAlumno(@PathVariable Long idalumno) // ResponseEntity representa el mensaje HTTP de
+																		// respuesta
+	{
+		ResponseEntity<?> responseEntity = null;
+		Optional<Curso> oc = null;// curso
+
+		oc = this.cursoService.obtenerCursoAlumno(idalumno);
+
+		if (oc.isEmpty()) {
+			// si no está--devolver el cuerpo vacío y 204 no content
+			responseEntity = ResponseEntity.noContent().build();
+		} else {
+			Curso curso_leido = oc.get();
+			responseEntity = ResponseEntity.ok(curso_leido);
+		}
+
+		return responseEntity;
+	}
 
 
 }

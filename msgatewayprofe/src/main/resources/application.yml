@@ -18,6 +18,12 @@ spring:
           - Path=/api/alumnos/**
         filters:
           - RewritePath=/api/alumnos/*, /alumno/
+      - id: mscursos 
+        uri: lb://mscursos
+        predicates:
+          - Path=/api/cursos/**
+        filters:
+          - RewritePath=/api/cursos/*, /curso/
 server:
   port: 8090
 eureka:
