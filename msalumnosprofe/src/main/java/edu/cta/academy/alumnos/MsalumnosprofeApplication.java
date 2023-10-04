@@ -8,7 +8,7 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 
 //@ComponentScan//para indicar el paquete/ubicacion de Service/Repository/Controller si estuvieran fuera del directorio raíz
-@SpringBootApplication
+@SpringBootApplication//incluye Configuration
 @EnableEurekaClient
 @EntityScan("edu.cta.academy.comun")//Así Spring busca las entidades en ese paquete - SI NO, sólo busca en el paquete raíz edu.cta.academy.alumnos
 @EnableFeignClients//Activamos el FeignClient
