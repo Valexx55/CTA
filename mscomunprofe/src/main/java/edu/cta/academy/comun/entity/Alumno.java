@@ -18,6 +18,8 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
+import org.springframework.hateoas.RepresentationModel;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.ParameterMode;
@@ -38,7 +40,7 @@ import javax.persistence.StoredProcedureParameter;
 			})
 		}
 		)
-public class Alumno {
+public class Alumno extends RepresentationModel<Alumno> {
 	
 	//TODO completar la definición de la entidad
 	@Id

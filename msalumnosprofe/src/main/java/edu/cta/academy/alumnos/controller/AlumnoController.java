@@ -1,5 +1,9 @@
 package edu.cta.academy.alumnos.controller;
 
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.Collections;
@@ -451,6 +455,27 @@ public class AlumnoController {
 		return responseEntity;
 	}
 
+	
+	// CONSULTAR TODOS con HATEOAS
+		@GetMapping("/hateoas") // GET http://localhost:8081/alumno/hateoas
+		public ResponseEntity<?> listarAlumnosHateoas() // ResponseEntity representa el mensaje HTTP de respuesta
+		{
+			ResponseEntity<?> responseEntity = null;
+			Iterable<Alumno> ita = null;// lista de alumnos
+
+			/*
+			 * var nombre = "HOLA"; nombre.charAt(4);
+			 */
+				logger.debug("ATENTIDO POR " + nombre_instancia + " PUERTO " + environment.getProperty("local.server.port"));
+				ita = this.alumnoService.consultarTodos();
+				for (Alumno a :ita)
+				{
+					a.add(linkTo(methodOn(AlumnoController.class).listarAlumnoPorId(a.getId())).withSelfRel());
+				}
+				responseEntity = ResponseEntity.ok(ita);// ita es el cuerpo
+
+			return responseEntity;
+		}
 	
 	
 

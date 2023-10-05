@@ -65,7 +65,7 @@ public class SecurityConfig {
 	{
 		return httpSecurity
 				//.authenticationManager(am)
-				.csrf().disable()//SIN ESTADO, SIN COOKIES, NO LA NECESITAMOS. EXIGIMOS TOKEN
+				.csrf().disable()//SIN ESTADO/SESIÓN, SIN COOKIES, 
 				.cors().disable()
 				.authorizeHttpRequests((authorize) -> authorize
 				        .anyRequest().authenticated()
