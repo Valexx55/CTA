@@ -24,6 +24,9 @@ public class MiFiltro implements Filter{
 			throws IOException, ServletException {
 		
 		System.out.println("A LA IDA");
+		chain.doFilter(request, response);//le dejamos pasar
+		System.out.println("A LA VUELTA");
+		/*System.out.println("A LA IDA");
 		HttpServletRequest httpServletRequest = (HttpServletRequest)request;
 		String cadena_auth =  httpServletRequest.getHeader("Authorization");
 		System.out.println("Cadena Auth = " + cadena_auth);
@@ -47,7 +50,7 @@ public class MiFiltro implements Filter{
 		//si no, le decimos que no
 		//Basic YWRtaW46emFyYWdvemE=
 		
-		System.out.println("A LA VUELTA");
+		System.out.println("A LA VUELTA");*/
 	}
 
 }
